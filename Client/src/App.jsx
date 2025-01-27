@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useMatch } from 'react-router-dom';
 import Home from './pages/student/Home';
 import CourseList from './pages/student/CourseList';
 import CourseDetails from './pages/student/CourseDetails';
@@ -11,11 +11,21 @@ import Dashboard from './pages/educator/Dashboard';
 import AddCourse from './pages/educator/AddCourse';
 import MyCourses from './pages/educator/MyCourses';
 import StudentsEnrolled from './pages/educator/StudentsEnrolled';
-import NavBar from './components/educator/NavBar';
+import NavBar from './components/student/NavBar'; // Only import NavBar once
 
 const App = () => {
+
+const isEducatorRoute = useMatch('/educator/*')
+
+
   return (
     <div className='text-default min-h-screen bg-white'>
+    
+
+    {!isEducatorRoute && <NavBar/>}
+
+
+
       <NavBar />
 
       <Routes>
