@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react'; // Import useContext
 import logo from '../../assets/logo.svg'; // Import the logo.svg
 import userIcon from '../../assets/user_icon.svg'; // Ensure the user_icon is correctly imported
 import { Link, useLocation } from 'react-router-dom';
 import { useClerk, useUser, UserButton } from '@clerk/clerk-react'; // Import UserButton
+import { AppContext } from '../../context/AppContext'; // Import AppContext
 
 const NavBar = () => {
+  const { navigate } = useContext(AppContext); // Use context to access navigate
+
   const location = useLocation();
   const isCourseListPage = location.pathname.includes('/course-list');
 
@@ -13,7 +16,7 @@ const NavBar = () => {
 
   return (
     <div className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4 ${isCourseListPage ? 'bg-white' : 'bg-cyan-100/70'}`}>
-      <img src={logo} alt="Logo" className='w-28 lg:w-32 cursor-pointer' />
+      <img onClick={() => navigate('/')} src={logo} alt="Logo" className='w-28 lg:w-32 cursor-pointer' />
 
       <div className='flex ml-auto items-center gap-5 text-lg text-gray-500'>
         <div className='flex items-center gap-5'>
