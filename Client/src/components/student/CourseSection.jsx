@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import React, { useContext } from 'react'; // Import useContext here
+import { Link } from 'react-router-dom';
+import { AppContext } from '../../context/AppContext';
 import CourseCard from './CourseCard';
 
-
-import { AppContext } from "../../context/AppContext";
-
-
 const CourseSection = () => {
-  const { allCourses } = useContext(AppContext); // Use useContext to access allCourses
+  const { allCourses } = useContext(AppContext); // Note: Ensure you're using 'allCourses'
 
   return (
     <div className='py-16 md:px-40 px-8'>
@@ -22,9 +19,9 @@ const CourseSection = () => {
         ))}
       </div>
 
-      <Link 
-        to={'/course-list'} 
-        onClick={() => window.scroll(0, 0)} 
+      <Link
+        to='/course-list'
+        onClick={() => scrollTo(0, 0)}
         className='text-gray-500 border border-gray-500/30 px-10 py-3 rounded'
       >
         Show all courses

@@ -39,7 +39,7 @@ import play_icon from './play_icon.svg'
 import blue_tick_icon from './blue_tick_icon.svg'
 import course_4 from './course_4.png'
 import profile_img from './profile_img.png'
-import profile_img2 from './profile_img2.png'
+//import profile_img2 from './profile_img2.png'
 import profile_img3 from './profile_img3.png'
 import lesson_icon from './lesson_icon.svg'
 
@@ -84,7 +84,7 @@ export const assets = {
     earning_icon,
     patients_icon,
     profile_img,
-    profile_img2,
+   // profile_img2,
     profile_img3,
     play_icon,
     blue_tick_icon,
