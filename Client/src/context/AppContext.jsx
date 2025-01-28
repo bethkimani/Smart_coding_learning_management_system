@@ -14,7 +14,10 @@ export const AppContextProvider = (props) => {
     setAllCourses(dummyCourses);
   };
 
-
+  useEffect(() => {
+    fetchAllCourses();
+  }, []);
+  
 
 
   const value = {
