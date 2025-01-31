@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS  # Import CORS
 import datetime
 from config import Config
 from models import db, User
@@ -11,10 +12,11 @@ from models import db, User
 app = Flask(__name__)
 app.config.from_object(Config)
 
-# Initialize the database, migrations, and JWT manager
+# Initialize the database, migrations, JWT manager, and CORS
 db.init_app(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
+CORS(app)  # Enable CORS for all routes
 
 # Create the database and tables
 with app.app_context():

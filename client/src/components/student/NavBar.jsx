@@ -13,7 +13,6 @@ const NavBar = () => {
   const [password, setPassword] = useState('');
   const [formVisible, setFormVisible] = useState(false);
 
-  // Close modal and reset input fields
   const closeModal = () => {
     setFormVisible(false);
     setEmail('');
@@ -22,6 +21,9 @@ const NavBar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form submitted"); // Debugging line
+    console.log("Email:", email, "Password:", password); // Check input values
+
     const url = isLogin ? 'http://127.0.0.1:5000/login' : 'http://127.0.0.1:5000/register';
     
     try {
@@ -34,17 +36,15 @@ const NavBar = () => {
         });
 
         const data = await response.json();
+        console.log(data); // Log the response from the server
 
         if (response.ok) {
             if (isLogin) {
-                // Store the token and navigate as needed
                 localStorage.setItem('token', data.access_token);
                 console.log('Login successful:', data.access_token);
-                // Navigate to a secure page or update context
             } else {
                 console.log('Registration successful:', data.message);
-                // Optionally, you can switch to the login state after successful registration
-                setIsLogin(true);
+                setIsLogin(true); // Switch to login state after registration
             }
             closeModal(); // Close the modal after success
         } else {
