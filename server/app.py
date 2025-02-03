@@ -8,8 +8,8 @@ import datetime
 from models import db, User, Question, Choice
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quizzer.db'
-app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Change this to a random secret
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'sqlite:///quizzer.db')
+app.config['JWT_SECRET_KEY'] = 'super_key'  # Change this to a random secret
 CORS(app)
 
 db.init_app(app)
