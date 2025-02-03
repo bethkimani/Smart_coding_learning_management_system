@@ -1,4 +1,1 @@
-# Procfile
-
-# This line defines how to run your web application.
-gunicorn app:app
+web: gunicorn app:app
