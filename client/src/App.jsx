@@ -11,20 +11,18 @@ import Dashboard from './pages/educator/Dashboard';
 import AddCourse from './pages/educator/AddCourse';
 import MyCourses from './pages/educator/MyCourses';
 import StudentsEnrolled from './pages/educator/StudentsEnrolled';
-import NavBar from './components/student/NavBar'; // Only import NavBar once
-
+import NavBar from './components/student/NavBar';
+import QuizManager from './components/student/QuizManager';
+import Quiz from './components/student/Quiz';
+import Quizzes from './components/student/Quizzes';
 
 const App = () => {
   const location = useLocation();
-
-  // List of educator routes where NavBar should not appear
   const educatorRoutes = ['/educator', '/educator/dashboard', '/educator/add-course', '/educator/my-courses', '/educator/students-enrolled'];
 
   return (
     <div className='text-default min-h-screen bg-white'>
-      {/* Render NavBar only if not on educator routes */}
       {!educatorRoutes.includes(location.pathname) && <NavBar />}
-
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/course-list' element={<CourseList />} />
@@ -38,7 +36,9 @@ const App = () => {
         <Route path='/educator/my-courses' element={<MyCourses />} />
         <Route path='/educator/students-enrolled' element={<StudentsEnrolled />} />
         
-
+        {/* Add Quiz Management Routes */}
+        <Route path='/quiz-manager' element={<QuizManager />} />
+        <Route path='/quizzes' element={<Quizzes />} />
       </Routes>
     </div>
   );
