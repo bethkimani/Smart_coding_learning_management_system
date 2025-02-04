@@ -11,11 +11,11 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'sqlite:///quizzer.db')
 app.config['JWT_SECRET_KEY'] = 'super_key'  # Change this to a random secret
-CORS(
-    app,
-    resources={r"/api/*": {"origins": "http://localhost:5173"}},  # Allow React frontend
-    supports_credentials=True,  # Allow cookies
-)
+from flask_cors import CORS
+from flask_cors import CORS
+
+CORS(app, resources={r"/api/*": {"origins": ["https://smart-coding-system.vercel.app"]}}, supports_credentials=True)
+
 
 db.init_app(app)
 migrate = Migrate(app, db)
