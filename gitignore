@@ -1,0 +1,8 @@
+
+
+
+FLASK_APP=app.py
+FLASK_ENV=development
+export SECRET_KEY=supersecretkey
+export JWT_SECRET_KEY=jwtsecretkey
+DATABASE_URL=postgresql://backend_e2cu_user:s5ghkLPVUHV634Xw7gy7hLWa9RQ0PITf@dpg-cudncpdumphs73cqdddg-a.oregon-postgres.render.com/backend_e2cu
