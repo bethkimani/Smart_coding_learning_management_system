@@ -7,17 +7,18 @@ from flask_cors import CORS
 import datetime
 import os
 
+# Import models
+from models import db, User, Question, Choice
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'sqlite:///quizzer.db')
 app.config['JWT_SECRET_KEY'] = 'super_key'  # Change this to a random secret
 
 # CORS configuration
+CORS(app, resources={r"/app/*": {"origins": "*", "allow_headers": "*", "expose_headers": "*", "supports_credentials": True}})
 
-CORS(app, resources={r"/app/*": {"origins": "*", "allow_headers":"*", "expose_headers":"*", "supports_credentials": True}})
-
-
-
-db = SQLAlchemy(app)
+# Initialize database and migrations
+db.init_app(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
 
