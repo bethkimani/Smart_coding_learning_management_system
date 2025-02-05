@@ -5,26 +5,26 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 import datetime
-from models import db, User, Question, Choice
 import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'sqlite:///quizzer.db')
 app.config['JWT_SECRET_KEY'] = 'super_key'  # Change this to a random secret
-from flask_cors import CORS
-from flask_cors import CORS
 
-CORS(app, resources={r"/api/*": {"origins": ["https://smart-coding-system.vercel.app"]}}, supports_credentials=True)
+# CORS configuration
+
+CORS(app, resources={r"/api/*": {"origins": "*", "allow_headers":"*", "expose_headers":"*", "supports_credentials": True}})
 
 
-db.init_app(app)
+
+db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
 
 with app.app_context():
     db.create_all()
 
-@app.route('/register', methods=['POST'])
+@app.route('/app/register', methods=['POST'])
 def register():
     data = request.get_json()
     email = data.get('email')
@@ -44,7 +44,7 @@ def register():
 
     return jsonify(message="User registered successfully"), 201
 
-@app.route('/login', methods=['POST'])
+@app.route('/app/login', methods=['POST'])
 def login():
     data = request.get_json()
     email = data.get('email')
@@ -57,7 +57,7 @@ def login():
     access_token = create_access_token(identity=user.id, expires_delta=datetime.timedelta(hours=1))
     return jsonify(access_token=access_token)
 
-@app.route('/quizzes', methods=['GET'])
+@app.route('/app/quizzes', methods=['GET'])
 @jwt_required()
 def get_quizzes():
     questions = Question.query.all()
@@ -67,7 +67,7 @@ def get_quizzes():
         'choices': [{'id': c.id, 'text': c.text, 'is_correct': c.is_correct} for c in q.choices]
     } for q in questions])
 
-@app.route('/submit', methods=['POST'])
+@app.route('/app/submit', methods=['POST'])
 @jwt_required()
 def submit_quiz():
     data = request.get_json()
