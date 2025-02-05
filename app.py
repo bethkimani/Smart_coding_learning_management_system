@@ -13,7 +13,7 @@ app.config['JWT_SECRET_KEY'] = 'super_key'  # Change this to a random secret
 
 # CORS configuration
 
-CORS(app, resources={r"/api/*": {"origins": "*", "allow_headers":"*", "expose_headers":"*", "supports_credentials": True}})
+CORS(app, resources={r"/app/*": {"origins": "*", "allow_headers":"*", "expose_headers":"*", "supports_credentials": True}})
 
 
 
